@@ -1,0 +1,5 @@
+FROM node
+
+RUN npm install -g gulp-cli json-server
+RUN mkdir -p /home/myriad/web-scheduler
+WORKDIR /home/myriad/web-scheduler

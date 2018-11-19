@@ -81,6 +81,7 @@ gulp.task('webserver', ['build-dev'], function() {
     .pipe(webserver({
       livereload: true,
       directoryListing: false,
+      host: "0.0.0.0",
       open: true,
       port: 8888
     }));
