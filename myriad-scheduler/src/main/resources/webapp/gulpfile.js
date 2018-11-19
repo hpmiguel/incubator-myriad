@@ -31,6 +31,7 @@ var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
 var webserver = require('gulp-webserver');
 var del = require('del');
+var exec = require('child_process').exec;
 
 gulp.task("js", ['clean'], function () {
   browserify({
@@ -94,13 +95,18 @@ gulp.task('watch', ['build-dev'], function() {
     gulp.watch('img/**', ['img']);
 });
 
+gulp.task('mock', function(){
+    return exec('json-server -H 0.0.0.0 --watch mock/mock.json')
+    //return exec('touch mockcreated')
+});
+
 gulp.task('clean', function() {
   return del(['./public']);
 });
 
 gulp.task('build-dev', ['js-dev', 'html', 'css', 'img']);
 
-gulp.task('dev', ['watch', 'webserver']);
+gulp.task('dev', ['watch', 'webserver', 'mock']);
 
 gulp.task('default', ['js', 'html', 'css', 'img']);
 
